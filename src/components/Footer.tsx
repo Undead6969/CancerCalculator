@@ -1,5 +1,5 @@
 
-import { Heart, Mail, Phone, MapPin } from 'lucide-react';
+import { Heart, Mail, Phone, MapPin, FileText, Globe, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -8,7 +8,7 @@ export const Footer = () => {
   return (
     <footer className="bg-gray-50 dark:bg-gray-900 border-t py-8 transition-colors duration-300">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8">
           <div>
             <div className="flex items-center">
               <Heart className="h-5 w-5 text-medical-accent mr-2" />
@@ -42,6 +42,24 @@ export const Footer = () => {
               <div className="flex items-start">
                 <MapPin className="h-4 w-4 text-medical-accent mt-0.5 mr-2" />
                 <span className="text-sm text-muted-foreground">123 Medical Center Blvd, Suite 101<br />Healthcare City, HC 12345</span>
+              </div>
+            </div>
+          </div>
+          
+          <div>
+            <h3 className="font-semibold text-sm uppercase tracking-wider mb-4">Legal</h3>
+            <div className="space-y-2">
+              <div className="flex items-start">
+                <FileText className="h-4 w-4 text-medical-accent mt-0.5 mr-2" />
+                <Link to="/terms" className="text-sm text-muted-foreground hover:text-primary transition-colors">Terms & Conditions</Link>
+              </div>
+              <div className="flex items-start">
+                <Shield className="h-4 w-4 text-medical-accent mt-0.5 mr-2" />
+                <Link to="/privacy" className="text-sm text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link>
+              </div>
+              <div className="flex items-start">
+                <Globe className="h-4 w-4 text-medical-accent mt-0.5 mr-2" />
+                <Link to="/disclaimer" className="text-sm text-muted-foreground hover:text-primary transition-colors">Medical Disclaimer</Link>
               </div>
             </div>
           </div>

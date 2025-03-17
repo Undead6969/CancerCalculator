@@ -1,7 +1,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Home, Calculator, Info, Heart, Moon, Sun } from 'lucide-react';
+import { Home, Calculator, Info, Heart, Moon, Sun, FileText, Shield, Globe } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from './ThemeProvider';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
@@ -47,6 +47,22 @@ export const MobileNav = () => {
               Dark Mode
             </>
           )}
+        </Button>
+        <Separator className="my-3" />
+        <div className="text-xs text-muted-foreground uppercase font-semibold tracking-wider pl-2 mb-1">
+          Legal
+        </div>
+        <Button variant="ghost" className="w-full justify-start text-sm" onClick={() => navigate('/terms')}>
+          <FileText className="mr-2 h-4 w-4" />
+          Terms & Conditions
+        </Button>
+        <Button variant="ghost" className="w-full justify-start text-sm" onClick={() => navigate('/privacy')}>
+          <Shield className="mr-2 h-4 w-4" />
+          Privacy Policy
+        </Button>
+        <Button variant="ghost" className="w-full justify-start text-sm" onClick={() => navigate('/disclaimer')}>
+          <Globe className="mr-2 h-4 w-4" />
+          Medical Disclaimer
         </Button>
         {lastUsedTool && (
           <>

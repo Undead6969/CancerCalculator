@@ -8,6 +8,9 @@ const routeTitles: Record<string, string> = {
   '/': 'Oncology Risk Assessment Tools',
   '/calculators': 'All Calculators',
   '/about': 'About Us',
+  '/terms': 'Terms and Conditions',
+  '/privacy': 'Privacy Policy',
+  '/disclaimer': 'Medical Disclaimer',
 };
 
 export const PageTitle = () => {
@@ -15,8 +18,7 @@ export const PageTitle = () => {
   
   useEffect(() => {
     // If it's a calculator page
-    if (location.pathname.startsWith('/calculators/')) {
-      const calcId = location.pathname.split('/').pop();
+    if (location.pathname.startsWith('/calculators/') || location.pathname === '/hfa-icos') {
       const calculator = calculators.find(c => c.route === location.pathname);
       
       if (calculator) {

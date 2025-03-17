@@ -11,6 +11,9 @@ import HfaIcos from "./pages/HfaIcos";
 import AllCalculators from "./pages/AllCalculators";
 import About from "./pages/About";
 import BSACalculator from "./pages/BSACalculator";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+import Disclaimer from "./pages/Disclaimer";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { calculators } from "./data/calculators";
 import { useEffect } from "react";
@@ -35,6 +38,9 @@ const App = () => {
         '/calculators',
         '/hfa-icos',
         '/calculators/bsa',
+        '/terms',
+        '/privacy',
+        '/disclaimer',
         '*'
       ];
       
@@ -67,6 +73,9 @@ const App = () => {
                 <Route path="/calculators" element={<AllCalculators />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/calculators/bsa" element={<BSACalculator />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/disclaimer" element={<Disclaimer />} />
                 {/* We should add all other calculator routes here */}
                 {/* For now, catch-all route will handle missing implementations */}
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
