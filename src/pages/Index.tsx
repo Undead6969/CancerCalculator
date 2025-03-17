@@ -15,6 +15,11 @@ const Index = () => {
   const featuredCalculators = calculators.slice(0, 3);
   const [lastUsedTool, setLastUsedTool] = useLocalStorage<string | null>("lastUsedTool", null);
 
+  // Set the document title
+  useEffect(() => {
+    document.title = "CancerCalc - Oncology Risk Assessment Tools";
+  }, []);
+
   const filteredCalculators = searchTerm 
     ? calculators.filter(calc => 
         calc.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -24,7 +29,7 @@ const Index = () => {
 
   return (
     <MainLayout>
-      <section className="py-12 md:py-20 bg-gradient-to-br from-primary/5 to-primary/10 rounded-3xl mb-12">
+      <section className="py-12 md:py-20 bg-gradient-to-br from-primary/5 to-primary/10 rounded-3xl mb-12 animate-fade-in">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center text-center space-y-4 md:space-y-6">
             <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium mb-2">
@@ -75,7 +80,7 @@ const Index = () => {
           />
 
           {searchTerm && (
-            <div className="absolute w-full mt-1 bg-white border rounded-md shadow-lg z-10 max-h-80 overflow-y-auto">
+            <div className="absolute w-full mt-1 bg-background border rounded-md shadow-lg z-10 max-h-80 overflow-y-auto">
               {filteredCalculators.length > 0 ? (
                 filteredCalculators.map((calc) => (
                   <div 
@@ -115,7 +120,7 @@ const Index = () => {
           {featuredCalculators.map((calc) => (
             <Card 
               key={calc.id}
-              className="hover:shadow-md transition-all cursor-pointer border-2"
+              className="hover:shadow-md transition-all cursor-pointer border-2 hover-lift"
               onClick={() => {
                 navigate(calc.route);
                 setLastUsedTool(calc.route);
@@ -140,7 +145,7 @@ const Index = () => {
       </section>
 
       <section className="container px-4 md:px-6 mb-16">
-        <Card className="bg-medical-light border-0">
+        <Card className="bg-medical-light dark:bg-medical/10 border-0">
           <CardContent className="p-6 md:p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
               <div>
@@ -157,7 +162,7 @@ const Index = () => {
                 </Button>
               </div>
               <div className="flex justify-center">
-                <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-sm">
+                <div className="bg-background border border-border p-6 rounded-xl shadow-md w-full max-w-sm">
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="h-10 w-10 rounded-full bg-medical-accent/10 flex items-center justify-center">
                       <Microscope className="h-5 w-5 text-medical-accent" />
@@ -168,16 +173,16 @@ const Index = () => {
                     </div>
                   </div>
                   <div className="space-y-3">
-                    <div className="p-2 bg-blue-50 border border-blue-100 rounded-md text-blue-800 text-sm">
+                    <div className="p-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-900/50 rounded-md text-blue-800 dark:text-blue-200 text-sm">
                       Medical Oncology
                     </div>
-                    <div className="p-2 bg-green-50 border border-green-100 rounded-md text-green-800 text-sm">
+                    <div className="p-2 bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-900/50 rounded-md text-green-800 dark:text-green-200 text-sm">
                       Surgical Oncology
                     </div>
-                    <div className="p-2 bg-purple-50 border border-purple-100 rounded-md text-purple-800 text-sm">
+                    <div className="p-2 bg-purple-50 dark:bg-purple-900/20 border border-purple-100 dark:border-purple-900/50 rounded-md text-purple-800 dark:text-purple-200 text-sm">
                       Pharmacology
                     </div>
-                    <div className="p-2 bg-amber-50 border border-amber-100 rounded-md text-amber-800 text-sm">
+                    <div className="p-2 bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-900/50 rounded-md text-amber-800 dark:text-amber-200 text-sm">
                       Hemato-Oncology
                     </div>
                   </div>

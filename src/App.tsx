@@ -14,6 +14,7 @@ import BSACalculator from "./pages/BSACalculator";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { calculators } from "./data/calculators";
 import { useEffect } from "react";
+import { PageTitle } from "./components/PageTitle";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -59,6 +60,7 @@ const App = () => {
           <Sonner />
           <ErrorBoundary>
             <BrowserRouter>
+              <PageTitle />
               <Routes>
                 <Route path="/" element={<Index />} />
                 <Route path="/hfa-icos" element={<HfaIcos />} />

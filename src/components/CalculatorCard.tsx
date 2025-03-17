@@ -23,7 +23,7 @@ export const CalculatorCard = ({ title, description, icon: Icon, route, onClick 
 
   return (
     <Card 
-      className="cursor-pointer hover:shadow-md transition-all border-2"
+      className="cursor-pointer hover:shadow-md transition-all border-2 hover-lift"
       onClick={handleClick}
     >
       <CardHeader className="pb-2">
