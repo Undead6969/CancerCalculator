@@ -22,6 +22,7 @@ const HfaIcos = () => {
     toggleCardiacRiskFactors,
     togglePreviousTreatment,
     toggleLifestyleFactors,
+    setInputs
   } = useHfaIcosCalculator();
 
   const [showResults, setShowResults] = useState(true);
@@ -159,7 +160,7 @@ const HfaIcos = () => {
                         checked={inputs.medicalHistory.includes('lvef-lt-50')}
                         onCheckedChange={() => toggleMedicalHistory('lvef-lt-50')}
                       />
-                      <Label htmlFor="history-lvef-low" className="text-sm">Baseline LVEF< 50%</Label>
+                      <Label htmlFor="history-lvef-low" className="text-sm">Baseline LVEF &lt; 50%</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Checkbox 
@@ -217,7 +218,7 @@ const HfaIcos = () => {
                   >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="lt-65" id="age-under-65" />
-                      <Label htmlFor="age-under-65">< 65 years</Label>
+                      <Label htmlFor="age-under-65">&lt; 65 years</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="65-79" id="age-65-79" />

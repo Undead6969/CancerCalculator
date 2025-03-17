@@ -239,6 +239,7 @@ export const useHfaIcosCalculator = () => {
   return {
     inputs,
     result,
+    setInputs,
     setPlannedTreatment,
     toggleMedicalHistory,
     toggleCardiacBiomarkers,
