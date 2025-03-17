@@ -1,8 +1,9 @@
 
 import { 
-  Heart, Calculator, Activity, Thermometer, FileMedical, 
-  Pill, Droplet, Scale, AlertCircle, LineChart, PieChart, 
-  Users, HeartPulse, ChemicalGlass, Microscope 
+  Heart, Calculator, Activity, Thermometer, 
+  FileMinus, Pill, Droplet, Scale, AlertCircle, 
+  LineChart, PieChart, Users, HeartPulse, 
+  Flask, Microscope 
 } from 'lucide-react';
 
 export interface Calculator {
@@ -20,7 +21,7 @@ export const calculators: Calculator[] = [
     title: 'Anthracycline total exposure calculator',
     description: 'Calculates total anthracycline exposure based on equivalent dose of each anthracycline received.',
     letter: 'A',
-    icon: ChemicalGlass,
+    icon: Flask,
     route: '/calculators/anthracycline'
   },
   {
