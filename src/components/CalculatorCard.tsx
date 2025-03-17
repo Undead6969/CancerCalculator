@@ -1,47 +1,44 @@
 
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { LucideIcon } from "lucide-react";
-import { Link } from "react-router-dom";
-import { cn } from "@/lib/utils";
 
 interface CalculatorCardProps {
   title: string;
   description: string;
-  icon?: LucideIcon;
+  icon: LucideIcon;
   route: string;
-  letter?: string;
-  className?: string;
+  onClick?: () => void;
 }
 
-export const CalculatorCard = ({
-  title,
-  description,
-  icon: Icon,
-  route,
-  letter,
-  className,
-}: CalculatorCardProps) => {
+export const CalculatorCard = ({ title, description, icon: Icon, route, onClick }: CalculatorCardProps) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (onClick) onClick();
+    navigate(route);
+  };
+
   return (
-    <Link to={route}>
-      <Card className={cn("h-full transition-all hover:shadow-md hover:border-primary/50", className)}>
-        <CardHeader className="pb-2">
-          <div className="flex justify-between items-start">
-            <CardTitle className="text-lg font-medium">{title}</CardTitle>
-            {letter && (
-              <div className="flex items-center justify-center h-6 w-6 rounded-full bg-muted text-muted-foreground text-xs font-semibold">
-                {letter}
-              </div>
-            )}
-            {Icon && <Icon className="h-5 w-5 text-primary" />}
-          </div>
-          <CardDescription className="text-sm">{description}</CardDescription>
-        </CardHeader>
-        <CardContent className="pt-0">
-          <div className="flex items-center text-sm font-medium text-primary hover:underline">
-            Use calculator
-          </div>
-        </CardContent>
-      </Card>
-    </Link>
+    <Card 
+      className="cursor-pointer hover:shadow-md transition-all border-2"
+      onClick={handleClick}
+    >
+      <CardHeader className="pb-2">
+        <div className="flex justify-between items-start">
+          <CardTitle className="text-lg font-medium">{title}</CardTitle>
+          <Icon className="h-5 w-5 text-primary" />
+        </div>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Button variant="link" className="p-0 h-auto text-primary">
+          Use calculator
+          <ChevronRight className="ml-1 h-4 w-4" />
+        </Button>
+      </CardContent>
+    </Card>
   );
 };

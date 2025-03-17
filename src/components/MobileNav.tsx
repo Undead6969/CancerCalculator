@@ -4,10 +4,12 @@ import { Separator } from '@/components/ui/separator';
 import { Home, Calculator, Info, Heart, Moon, Sun } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from './ThemeProvider';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 export const MobileNav = () => {
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
+  const [lastUsedTool] = useLocalStorage<string | null>("lastUsedTool", null);
 
   return (
     <div className="flex flex-col h-full py-6">
@@ -46,10 +48,14 @@ export const MobileNav = () => {
             </>
           )}
         </Button>
-        <Separator className="my-4" />
-        <Button onClick={() => navigate('/hfa-icos')} className="w-full bg-medical-accent hover:bg-medical-accent/90">
-          HFA-ICOS Risk Tool
-        </Button>
+        {lastUsedTool && (
+          <>
+            <Separator className="my-4" />
+            <Button onClick={() => navigate(lastUsedTool)} className="w-full bg-medical-accent hover:bg-medical-accent/90">
+              Continue Last Tool
+            </Button>
+          </>
+        )}
       </div>
     </div>
   );

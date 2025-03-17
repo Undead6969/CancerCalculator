@@ -2,16 +2,18 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { MainLayout } from "@/layouts/MainLayout";
-import { Calculator, Heart, HeartPulse, Microscope, Search, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { Calculator, Heart, Microscope, Search, ChevronRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { calculators } from "@/data/calculators";
+import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 const Index = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const featuredCalculators = calculators.slice(0, 3);
+  const [lastUsedTool, setLastUsedTool] = useLocalStorage<string | null>("lastUsedTool", null);
 
   const filteredCalculators = searchTerm 
     ? calculators.filter(calc => 
@@ -26,24 +28,26 @@ const Index = () => {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center text-center space-y-4 md:space-y-6">
             <div className="inline-flex items-center rounded-full border px-3 py-1 text-sm font-medium mb-2">
-              <Heart className="h-4 w-4 mr-1 text-medical-accent" />
+              <Microscope className="h-4 w-4 mr-1 text-medical-accent" />
               <span>Oncology Risk Assessment Tools</span>
             </div>
             <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              Cancer & Cardio-Oncology Calculators
+              Oncology Calculators
             </h1>
             <p className="max-w-[700px] text-muted-foreground md:text-xl">
-              Evidence-based calculators and risk assessment tools for healthcare professionals in oncology and cardio-oncology
+              Evidence-based calculators and risk assessment tools for healthcare professionals across all oncology specialties
             </p>
             <div className="flex flex-col sm:flex-row gap-4 min-[400px]:gap-2">
-              <Button 
-                size="lg" 
-                className="bg-medical-accent hover:bg-medical-accent/90"
-                onClick={() => navigate('/hfa-icos')}
-              >
-                <HeartPulse className="mr-2 h-4 w-4" />
-                HFA-ICOS Risk Tool
-              </Button>
+              {lastUsedTool ? (
+                <Button 
+                  size="lg" 
+                  className="bg-medical-accent hover:bg-medical-accent/90"
+                  onClick={() => navigate(lastUsedTool)}
+                >
+                  <Calculator className="mr-2 h-4 w-4" />
+                  Continue Last Calculator
+                </Button>
+              ) : null}
               <Button 
                 size="lg" 
                 onClick={() => navigate('/calculators')}
@@ -79,6 +83,7 @@ const Index = () => {
                     className="p-3 hover:bg-muted cursor-pointer flex justify-between items-center border-b last:border-0"
                     onClick={() => {
                       navigate(calc.route);
+                      setLastUsedTool(calc.route);
                       setSearchTerm("");
                     }}
                   >
@@ -111,7 +116,10 @@ const Index = () => {
             <Card 
               key={calc.id}
               className="hover:shadow-md transition-all cursor-pointer border-2"
-              onClick={() => navigate(calc.route)}
+              onClick={() => {
+                navigate(calc.route);
+                setLastUsedTool(calc.route);
+              }}
             >
               <CardHeader className="pb-2">
                 <div className="flex justify-between items-start">
@@ -136,42 +144,41 @@ const Index = () => {
           <CardContent className="p-6 md:p-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
               <div>
-                <h2 className="text-2xl font-bold tracking-tight text-primary mb-4">HFA-ICOS Cardio-Oncology Risk Assessment Tool</h2>
+                <h2 className="text-2xl font-bold tracking-tight text-primary mb-4">Multi-specialty Oncology Risk Assessment Tools</h2>
                 <p className="text-muted-foreground mb-6">
-                  Assess cardiovascular risk in cancer patients before starting potentially cardiotoxic treatments. This tool was developed by leading cardio-oncology experts.
+                  Access a comprehensive library of calculators for all oncology specialties, including medical, surgical, radiation oncology, and more. Developed in collaboration with specialists across disciplines.
                 </p>
                 <Button 
                   size="lg" 
-                  className="bg-medical-accent hover:bg-medical-accent/90"
-                  onClick={() => navigate('/hfa-icos')}
+                  onClick={() => navigate('/calculators')}
                 >
-                  <HeartPulse className="mr-2 h-4 w-4" />
-                  Access the Tool
+                  <Calculator className="mr-2 h-4 w-4" />
+                  Browse All Tools
                 </Button>
               </div>
               <div className="flex justify-center">
                 <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-sm">
                   <div className="flex items-center space-x-3 mb-4">
                     <div className="h-10 w-10 rounded-full bg-medical-accent/10 flex items-center justify-center">
-                      <HeartPulse className="h-5 w-5 text-medical-accent" />
+                      <Microscope className="h-5 w-5 text-medical-accent" />
                     </div>
                     <div>
-                      <div className="font-medium">Cardio-Oncology</div>
-                      <div className="text-xs text-muted-foreground">Risk assessment</div>
+                      <div className="font-medium">Oncology Tools</div>
+                      <div className="text-xs text-muted-foreground">Category-based assessment</div>
                     </div>
                   </div>
                   <div className="space-y-3">
+                    <div className="p-2 bg-blue-50 border border-blue-100 rounded-md text-blue-800 text-sm">
+                      Medical Oncology
+                    </div>
                     <div className="p-2 bg-green-50 border border-green-100 rounded-md text-green-800 text-sm">
-                      Low Risk
+                      Surgical Oncology
                     </div>
-                    <div className="p-2 bg-yellow-50 border border-yellow-100 rounded-md text-yellow-800 text-sm">
-                      Moderate Risk
+                    <div className="p-2 bg-purple-50 border border-purple-100 rounded-md text-purple-800 text-sm">
+                      Pharmacology
                     </div>
-                    <div className="p-2 bg-orange-50 border border-orange-100 rounded-md text-orange-800 text-sm">
-                      High Risk
-                    </div>
-                    <div className="p-2 bg-red-50 border border-red-100 rounded-md text-red-800 text-sm">
-                      Very High Risk
+                    <div className="p-2 bg-amber-50 border border-amber-100 rounded-md text-amber-800 text-sm">
+                      Hemato-Oncology
                     </div>
                   </div>
                 </div>

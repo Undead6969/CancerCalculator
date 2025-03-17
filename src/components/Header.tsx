@@ -5,9 +5,11 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useNavigate } from 'react-router-dom';
 import { MobileNav } from './MobileNav';
 import { ThemeToggle } from './ThemeToggle';
+import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 export const Header = () => {
   const navigate = useNavigate();
+  const [lastUsedTool] = useLocalStorage<string | null>("lastUsedTool", null);
 
   return (
     <header className="bg-background border-b">
@@ -16,7 +18,7 @@ export const Header = () => {
           <Heart className="h-8 w-8 text-medical-accent" />
           <div>
             <h1 className="text-xl font-bold text-primary">CancerCalc</h1>
-            <p className="text-xs text-muted-foreground">Medical Risk Assessment Tools</p>
+            <p className="text-xs text-muted-foreground">Oncology Risk Assessment Tools</p>
           </div>
         </div>
         
@@ -27,9 +29,11 @@ export const Header = () => {
             All Calculators
           </Button>
           <Button variant="ghost" onClick={() => navigate('/about')}>About</Button>
-          <Button onClick={() => navigate('/hfa-icos')} className="bg-medical-accent hover:bg-medical-accent/90">
-            HFA-ICOS Tool
-          </Button>
+          {lastUsedTool && (
+            <Button onClick={() => navigate(lastUsedTool)} className="bg-medical-accent hover:bg-medical-accent/90">
+              Continue Last Tool
+            </Button>
+          )}
           <ThemeToggle />
         </div>
         
