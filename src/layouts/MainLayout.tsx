@@ -10,7 +10,7 @@ interface MainLayoutProps {
 
 export const MainLayout = ({ children }: MainLayoutProps) => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen transition-colors duration-300">
       <Header />
       <ScrollArea className="flex-1">
         <main className="flex-1 container mx-auto px-4 py-8">

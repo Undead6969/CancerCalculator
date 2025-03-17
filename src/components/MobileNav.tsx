@@ -1,11 +1,13 @@
 
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import { Home, Calculator, Info, Heart } from 'lucide-react';
+import { Home, Calculator, Info, Heart, Moon, Sun } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTheme } from './ThemeProvider';
 
 export const MobileNav = () => {
   const navigate = useNavigate();
+  const { theme, setTheme } = useTheme();
 
   return (
     <div className="flex flex-col h-full py-6">
@@ -26,6 +28,23 @@ export const MobileNav = () => {
         <Button variant="ghost" className="w-full justify-start" onClick={() => navigate('/about')}>
           <Info className="mr-2 h-5 w-5" />
           About
+        </Button>
+        <Button 
+          variant="ghost" 
+          className="w-full justify-start" 
+          onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+        >
+          {theme === 'dark' ? (
+            <>
+              <Sun className="mr-2 h-5 w-5" />
+              Light Mode
+            </>
+          ) : (
+            <>
+              <Moon className="mr-2 h-5 w-5" />
+              Dark Mode
+            </>
+          )}
         </Button>
         <Separator className="my-4" />
         <Button onClick={() => navigate('/hfa-icos')} className="w-full bg-medical-accent hover:bg-medical-accent/90">

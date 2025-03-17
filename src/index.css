@@ -46,20 +46,20 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 222.2 47.4% 11.2%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 222.2 47.4% 11.2%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 222.2 47.4% 11.2%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 79% 46%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 210 79% 50%;
+    --primary-foreground: 222.2 47.4% 11.2%;
 
-    --secondary: 199 89% 48%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
 
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
@@ -67,12 +67,21 @@
     --accent: 348 100% 59%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    --sidebar-background: 222.2 47.4% 11.2%;
+    --sidebar-foreground: 210 40% 98%;
+    --sidebar-primary: 210 79% 50%;
+    --sidebar-primary-foreground: 222.2 47.4% 11.2%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 210 40% 98%;
   }
 }
 
@@ -82,22 +91,63 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground transition-colors duration-300;
   }
 }
 
+@keyframes pulse-bg {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-pulse-bg {
+  background-size: 200% 200%;
+  animation: pulse-bg 3s ease infinite;
+}
+
 .risk-low {
-  @apply bg-green-100 text-green-800 border-green-300;
+  @apply bg-green-100 text-green-800 border-green-300 dark:bg-green-900/30 dark:text-green-300 dark:border-green-800;
 }
 
 .risk-moderate {
-  @apply bg-yellow-100 text-yellow-800 border-yellow-300;
+  @apply bg-yellow-100 text-yellow-800 border-yellow-300 dark:bg-yellow-900/30 dark:text-yellow-300 dark:border-yellow-800;
 }
 
 .risk-high {
-  @apply bg-red-100 text-red-800 border-red-300;
+  @apply bg-red-100 text-red-800 border-red-300 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800;
 }
 
 .risk-very-high {
-  @apply bg-red-200 text-red-900 border-red-400;
+  @apply bg-red-200 text-red-900 border-red-400 dark:bg-red-900/50 dark:text-red-300 dark:border-red-700;
 }
+
+.hover-scale {
+  @apply transition-transform duration-300 hover:scale-105;
+}
+
+.hover-lift {
+  @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+}
+
+/* Enhanced animations for cancer-related theme */
+.card-pulse {
+  @apply relative overflow-hidden;
+}
+
+.card-pulse::after {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 transition-opacity duration-1000;
+}
+
+.card-pulse:hover::after {
+  @apply animate-[pulse_2s_ease-in-out_infinite] opacity-100;
+}
+
+.medical-gradient {
+  @apply bg-gradient-to-br from-medical to-medical-dark;
+}
+
